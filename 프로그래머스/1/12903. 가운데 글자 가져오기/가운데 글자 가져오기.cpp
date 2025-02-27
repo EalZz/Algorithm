@@ -5,6 +5,5 @@
 using namespace std;
 
 string solution(string s) {
-    int len = s.length();
-    return (len % 2 == 0) ? s.substr(len / 2 - 1, 2) : s.substr(len / 2, 1);
+    return (s.length() % 2 == 0) ? s.substr(s.length() / 2 - 1, 2) : s.substr(s.length() / 2, 1);
 }
