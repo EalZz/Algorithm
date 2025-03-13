@@ -4,10 +4,9 @@
 using namespace std;
 
 double solution(vector<int> arr) {
-    int len = arr.size();
     double sum = 0;
     
-    while(len--) sum += arr[len];
+    for(int i = 0; i < arr.size(); i++) sum += arr[i];
 
     return sum / arr.size();
 }
