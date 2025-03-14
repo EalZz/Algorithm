@@ -9,6 +9,7 @@ int solution(int n) {
     isPrime[0] = isPrime[1] = false;
     
     for (int i = 2; i <= sqrt(n); i++) {
+        if(isPrime[i] == false) continue;
         if (isPrime[i]) {
             for (int j = i * i; j <= n; j += i) {
                 isPrime[j] = false;
