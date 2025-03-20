@@ -9,8 +9,15 @@ string solution(vector<string> participant, vector<string> completion) {
     int i = 0, j = 0;
     sort(participant.begin(), participant.end());
     sort(completion.begin(), completion.end());
+    
     if(participant.size() == 1) return participant[0];
     
+    for(i; i < participant.size() - 1; i++){
+        if(participant[i] != completion[i]) return participant[i];
+    }
+    
+    return participant.back();
+    /*
     while(1) {
         if(participant[i] != completion[i]) {
             idx = i;
@@ -21,4 +28,5 @@ string solution(vector<string> participant, vector<string> completion) {
     }
     
     return participant[i];
+    */
 }
