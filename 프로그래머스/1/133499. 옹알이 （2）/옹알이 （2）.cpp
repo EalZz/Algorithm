@@ -11,7 +11,7 @@ int solution(vector<string> babbling) {
 
         for(int i = 0; i < ong.size(); i++){
             auto it = bab.find(ong[i]);
-            while ((it = bab.find(ong[i], it)) != string::npos) {
+            while ((it = bab.find(ong[i])) != string::npos) {
                 bab.erase(it, ong[i].length());
                 bab.insert(it, 1, '0' + i); 
                 it++; 
