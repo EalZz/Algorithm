@@ -1,7 +1,6 @@
 #include <string>
 #include <vector>
 #include <cmath>
-#include <iostream>
 
 using namespace std;
 
@@ -15,7 +14,6 @@ int solution(int number, int limit, int power) {
                 else cnt += 2;
             }
         }
-        cout << cnt << endl;
         if (cnt > limit) answer += power;
         else answer += cnt;
     }
