@@ -21,7 +21,7 @@ vector<int> solution(vector<string> keymap, vector<string> targets) {
                 answer[i] = -1;
                 break;
             }
-            //있으면 최소치만 저장
+            //있으면 최소치만 저장 후 다음 글자 탐색
             else answer[i] += cnt;
         }
     }
