@@ -1,10 +1,10 @@
 # [level 1] 대충 만든 자판 - 160586 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/160586) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/160586#) 
 
 ### 성능 요약
 
-메모리: 4.21 MB, 시간: 8.96 ms
+메모리: 3.67 MB, 시간: 12.22 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 04월 08일 15:16:18
+2025년 04월 08일 15:19:02
 
 ### 문제 설명
 
