@@ -7,9 +7,10 @@ using namespace std;
 
 vector<string> solution(vector<string> players, vector<string> callings) {
     map<string, int> m;
-    //for(int i = 0; i < players.size(); i++) m[players[i]] = i; 
+    //선수와 순위(인덱스) 맵핑
     for(int i = 0; i < players.size(); i++) m[players[i]] = i; 
-    //선수, 처음순위로 매핑
+    
+    //선수가 불리면 앞 선수와 스왑 후 인덱스도 교체
     for(auto call : callings) {
         int call_idx = m[call];
         int swap_idx = call_idx - 1;
