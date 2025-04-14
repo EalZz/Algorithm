@@ -7,9 +7,8 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
     int p_time = 0, b_time = 0, p_health = health, attack_idx = 0;
 
     while (p_time < attacks.back().front()) {
-        
         p_time++;                               // 현재시간 + 1
-
+        
         // 공격시간(마지막 공격제외)과 현재시간 우선 비교
         if (attack_idx < attacks.size() && p_time == attacks[attack_idx].front()) { 
             p_health -= attacks[attack_idx].back();
@@ -20,7 +19,6 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
             }
             continue;
         }
-
 
         if (b_time < bandage.front()) {
             b_time++;
@@ -35,5 +33,6 @@ int solution(vector<int> bandage, int health, vector<vector<int>> attacks) {
             }
         }
     }
+    
     return p_health;
 }
