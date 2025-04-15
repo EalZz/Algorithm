@@ -2,7 +2,6 @@
 #include <vector>
 #include <sstream>
 #include <map>
-#include <iostream>
 
 using namespace std;
 
@@ -31,34 +30,32 @@ int solution(vector<string> friends, vector<string> gifts) {
     }
     
     for(auto f1 : friends) {
-        cout << f1 << " ";
         for(auto f2 : friends) {
-            if(f1 == f2) continue;
-            if(givetake[f1][f2] > givetake[f2][f1]) gifted[f1]++;
-            if(givetake[f1][f2] == givetake[f2][f1]) {
-                if(gift_score[f1] > gift_score[f2]) gifted[f1]++;
+            if(f1 == f2 || givetake[f1][f2] < givetake[f2][f1]) continue;
+            if(givetake[f1][f2] > givetake[f2][f1]) gifted[f1]++; //준 선물이 많으면 선물 받음
+            else //if(givetake[f1][f2] == givetake[f2][f1]) 
+            {
+                if(gift_score[f1] > gift_score[f2]) gifted[f1]++; //주고 받은 선물이 같으면 선물지수 체크
             }
         }
-        if(answer < gifted[f1]) answer = gifted[f1];
-        cout << gifted[f1] << endl;
+        if(answer < gifted[f1]) answer = gifted[f1];              //받은 선물 최대값 저장
     }
     
-    
+    return answer;
+}
 
+/*
 cout << "G\R";
-for(auto& f : friends) {
+for(auto f : friends) {
     cout << "\t" << f;
 }
 cout << "\n";
 
-for(auto& f1 : friends) {
+for(auto f1 : friends) {
     cout << f1;
-    for(auto& f2 : friends) {
+    for(auto f2 : friends) {
         cout << "\t" << givetake[f1][f2];
     }
     cout << "\n";
 }
-    
-    
-    return answer;
-}
+*/
