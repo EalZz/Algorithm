@@ -38,7 +38,8 @@ int solution(vector<string> friends, vector<string> gifts) {
                 if(gift_score[f1] > gift_score[f2]) gifted[f1]++; //주고 받은 선물이 같으면 선물지수 체크
             }
         }
-        if(answer < gifted[f1]) answer = gifted[f1];              //받은 선물 최대값 저장
+        answer = max(answer, gifted[f1]);                         //받은 선물 최대값 저장
+        //if(answer < gifted[f1]) answer = gifted[f1];              
     }
     
     return answer;
