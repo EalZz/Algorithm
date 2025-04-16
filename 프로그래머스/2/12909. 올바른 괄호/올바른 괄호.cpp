@@ -10,6 +10,5 @@ bool solution(string s) {
         else if(c == ')') check--;
         if(check < 0) return false;
     }
-    if(check == 0) return true;
-    else return false;
+    return check == 0;
 }
