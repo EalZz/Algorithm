@@ -11,7 +11,7 @@ vector<int> solution(string s) {
         int cnt = count(s.begin(), s.end(), '0'); 
         answer[1] += cnt;
 
-        int len = s.size() - cnt; // 1의 개수
+        int len = s.size() - cnt;
         s = "";
 
         while (len > 0) {
