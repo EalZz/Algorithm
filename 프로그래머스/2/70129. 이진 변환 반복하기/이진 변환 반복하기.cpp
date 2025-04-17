@@ -9,18 +9,17 @@ vector<int> solution(string s) {
 
     while (s != "1") {
         int cnt = count(s.begin(), s.end(), '0'); 
-        answer[1] += cnt;
-
         int len = s.size() - cnt;
+        
+        answer[1] += cnt;
         s = "";
 
         while (len > 0) {
-            s = char(len % 2 + '0') + s;
+            s.push_back(len % 2 + '0');
             len /= 2;
         }
-
         answer[0]++;
     }
-
+    
     return answer;
 }
