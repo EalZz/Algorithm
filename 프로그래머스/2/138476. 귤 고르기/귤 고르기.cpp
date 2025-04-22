@@ -1,33 +1,25 @@
 #include <string>
 #include <vector>
+#include <map>
 #include <algorithm>
-#include <iostream>
 
 using namespace std;
 
 int solution(int k, vector<int> tangerine) {
-    int answer = 0, sum = 0, cnt = 0;
-    vector<int> idxs;
-    
-    sort(tangerine.begin(), tangerine.end());
-    
-    for(int i = 1; i < tangerine.size(); i++) {
-        cnt++;
-        if(tangerine[i - 1] != tangerine[i]) {
-            idxs.push_back(cnt);
-            cout << cnt << endl;
-            cnt = 0;
-        }
-    }
-    cnt++;
-    idxs.push_back(cnt);
-    cout << cnt << endl;
-    
-    sort(idxs.begin(), idxs.end(), greater<int>());
-    for(auto i : idxs) {
-        sum += i;
+    int sum = 0, answer = 0;
+    map<int, int> cntm;
+    vector<int> cnts;
+
+    for(int t : tangerine) cntm[t]++;
+
+    for(auto cm : cntm) cnts.push_back(cm.second);
+    sort(cnts.begin(), cnts.end(), greater<int>());
+
+    for(int c : cnts) {
+        sum += c;
         answer++;
-        if(sum >= k) break;
+        if (sum >= k) break;
     }
+
     return answer;
 }
