@@ -22,7 +22,7 @@ int main() {
         cout << "#" << i << " ";
         if (cnt == 4) {
             cout << "0" << endl;
-            break;
+            continue;
         }
 
         int count = 0;
