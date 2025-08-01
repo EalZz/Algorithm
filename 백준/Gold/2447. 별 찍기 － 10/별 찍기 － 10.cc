@@ -11,34 +11,38 @@
 #include <deque>
 
 using namespace std;
-void star(long long T, long long row, long long col);
+void star(int N, int row, int col);
 
-int main()
-{   
+int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    long long T = 0; cin >> T;
-    long long row = T, col = T;
+    //int N = 0, K = 0; 
+    //cin >> N >> K;
+    int T = 0; cin >> T;
 
-    for (int i = 0; i < row; i++) {
-        for (int j = 0; j < col; j++) {
-            star(T, i, j);
-        }
+    for (int i = 0; i < T; i++) {
+        for (int j = 0; j < T; j++) star(T, i, j);
         cout << '\n';
     }
+
     return 0;
 }
 
-void star(long long T, long long row, long long col) {
-    if (T == 1) {
+void star(int N, int row, int col) {
+    if (N == 1) {
         cout << "*";
         return;
     }
-    long long token = T / 3;
-    long long trow = row / token;
-    long long tcol = col / token;
-    
-    if (trow == 1 && tcol == 1) cout << " ";
-    else star(token, row % token, col % token);
+
+    int size = N / 3;
+    int trow = row / size;
+    int tcol = col / size;
+
+    if (trow == 1 && tcol == 1) {
+        cout << " ";
+        return;
+    }
+
+    star(size, row % size, col % size);
 }
