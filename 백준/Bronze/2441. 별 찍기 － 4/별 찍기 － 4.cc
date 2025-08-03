@@ -12,7 +12,7 @@
 
 using namespace std;
 //int qmatrix(vector<vector<int>>& matrix, int row, int col, int T);
-string star(string s, int T, int black);
+void star(string& s, int T, int black);
 
 int main() {
     ios::sync_with_stdio(false);
@@ -23,19 +23,16 @@ int main() {
     int T = 0; cin >> T;
     string s;
 
-    cout << star(s, T, 0);
+    star(s, T, 0);
+    cout << s;
 
     return 0;
 }
 
-string star(string s, int T, int black) {
-    if (T == 0) return s;
-
-    s += string(black, ' ');
-    s += string(T, '*');
-    s += '\n';
-
-    return star(s, T - 1, black + 1);
+void star(string& s, int T, int black) {
+    if (T == 0) return;
+    s += string(black, ' ') +  string(T, '*') + '\n';
+    star(s, T - 1, black + 1);
 }
 
 
