@@ -11,72 +11,65 @@
 #include <deque>
 
 using namespace std;
-void preorder(char node, map<char, vector<char>>& tree);
-void  postorder(char node, map<char, vector<char>>& tree);
-void  inorder(char node, map<char, vector<char>>& tree);
+//int qmatrix(vector<vector<int>>& matrix, int row, int col, int T);
+void preorder(map<char, vector<char>>& tree, char node);
+void inorder(map<char, vector<char>>& tree, char node);
+void postorder(map<char, vector<char>>& tree, char node);
+
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
+    //int N = 0, K = 0; 
+    //cin >> N >> K;
+    int T = 0; cin >> T;
+    
     map<char, vector<char>> tree;
-    //map<char, bool> isVisited;
 
-    int N = 0; cin >> N;
-    for (int i = 0; i < N; i++) {
-        char root, left, right; 
+    for (int i = 0; i < T; i++) {
+        char root, left, right;
         cin >> root >> left >> right;
         tree[root] = { left, right };
-        //isVisited[root] = false;
     }
 
-    preorder('A', tree); cout << '\n';
-    postorder('A', tree); cout << '\n';
-    inorder('A', tree);
+    preorder(tree, 'A'); cout << '\n';
+    inorder(tree, 'A'); cout << '\n';
+    postorder(tree, 'A');
 
     return 0;
 }
 
-void preorder(char node, map<char, vector<char>>& tree) {
-    if (node == '.') return;     
-
-    cout << node;                 
-    preorder(tree[node][0], tree);  
-    preorder(tree[node][1], tree); 
-}
-
-
-void  postorder(char node, map<char, vector<char>>& tree) {
+void preorder(map<char, vector<char>>& tree, char node) {
     if (node == '.') return;
 
-    postorder(tree[node][0], tree);
     cout << node;
-    postorder(tree[node][1], tree);
+    preorder(tree, tree[node][0]);
+    preorder(tree, tree[node][1]);
+
+    return;
 }
 
-void  inorder(char node, map<char, vector<char>>& tree) {
+void inorder(map<char, vector<char>>& tree, char node) {
     if (node == '.') return;
 
-    inorder(tree[node][0], tree);
-    inorder(tree[node][1], tree);
+    inorder(tree, tree[node][0]);
     cout << node;
+    inorder(tree, tree[node][1]);
+
+    return;
 }
 
-/*
-void  preorder(char idx, map<char, vector<char>> tree, map<char, bool>& isVisited) {
-    if (isVisited[idx] == false) {
-        cout << idx;
-        isVisited[idx] = true;
-        if (!isVisited[tree[idx][0]] && tree[idx][0] != '.')
-            preorder(tree[idx][0], tree, isVisited);
-        else if (!isVisited[tree[idx][1]] && tree[idx][1] != '.')
-            preorder(tree[idx][1], tree, isVisited);
-        else return;
-    }
-    if (!isVisited[tree[idx][0]] && tree[idx][0] != '.')
-        preorder(tree[idx][0], tree, isVisited);
-    else if (!isVisited[tree[idx][1]] && tree[idx][1] != '.')
-        preorder(tree[idx][1], tree, isVisited);
-    else return;
+void postorder(map<char, vector<char>>& tree, char node) {
+    if (node == '.') return;
+
+    postorder(tree, tree[node][0]);
+    postorder(tree, tree[node][1]);
+    cout << node;
+
+    return;
 }
-*/
+
+int qmatrix(vector<vector<int>>& matrix, int row, int col, int T) {
+    return 0;
+}
