@@ -7,28 +7,29 @@ int solution(string begin, string target, vector<string> words) {
     queue<pair<string, int>> bfs;
     vector<bool> isVisited(words.size(), false);
     bfs.push({begin, 0});
-
-    while(!bfs.empty()){
+    
+    while(!bfs.empty()) {
         string usingword = bfs.front().first;
         int currentLevel = bfs.front().second;
         bfs.pop();
         
         if(usingword == target) return currentLevel;
 
-        for(int j = 0; j < words.size(); j++) {
-            int cnt = 0;
-            if(!isVisited[j]) {
-                for(int i = 0; i < words[j].size(); i++) {
-                    if(words[j][i] != usingword[i]) cnt++;
+        for(int i = 0; i < words.size(); i++) {
+            if(!isVisited[i]) {
+                int cnt = 0;
+                for(int j = 0; j < words[i].size(); j++) {
+                    if(usingword[j] != words[i][j]) cnt++;
                     if(cnt > 1) break;
                 }
                 if(cnt == 1) {
-                    bfs.push({words[j], currentLevel + 1});
-                    isVisited[j] = true;
+                    isVisited[i] = true;
+                    bfs.push({words[i], currentLevel + 1});
                 }
             }
         }
     }
+    
     return 0;
 }
 //int dfs(string begin, string target, vector<string> words
