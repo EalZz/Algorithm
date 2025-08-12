@@ -10,11 +10,11 @@ int solution(string begin, string target, vector<string> words) {
     
     while(!bfs.empty()) {
         string usingword = bfs.front().first;
-        int currentLevel = bfs.front().second;
+        int currentlevel = bfs.front().second;
         bfs.pop();
         
-        if(usingword == target) return currentLevel;
-
+        if(usingword == target) return currentlevel;
+        
         for(int i = 0; i < words.size(); i++) {
             if(!isVisited[i]) {
                 int cnt = 0;
@@ -23,8 +23,8 @@ int solution(string begin, string target, vector<string> words) {
                     if(cnt > 1) break;
                 }
                 if(cnt == 1) {
+                    bfs.push({words[i], currentlevel + 1});
                     isVisited[i] = true;
-                    bfs.push({words[i], currentLevel + 1});
                 }
             }
         }
@@ -32,4 +32,3 @@ int solution(string begin, string target, vector<string> words) {
     
     return 0;
 }
-//int dfs(string begin, string target, vector<string> words
