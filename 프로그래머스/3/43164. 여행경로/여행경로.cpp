@@ -24,14 +24,16 @@ bool dfs(string airport, vector<vector<string>>& tickets, vector<string>& answer
     if(answer.size() == tickets.size() + 1) return true;
     
     for(int i = 0; i < tickets.size(); i++) {
-        if(airport == tickets[i][0] && !isVisited[i]) {
+        if(!isVisited[i] && tickets[i][0] == airport) {
             isVisited[i] = true;
             answer.push_back(tickets[i][1]);
-            if (dfs(tickets[i][1], tickets, answer, isVisited)) return true;
             
-            answer.pop_back();
+            if(dfs(tickets[i][1], tickets, answer, isVisited)) return true;
+            
             isVisited[i] = false;
+            answer.pop_back();
         }
     }
+    
     return false;
 }
