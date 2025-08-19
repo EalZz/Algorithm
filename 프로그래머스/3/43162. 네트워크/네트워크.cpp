@@ -3,26 +3,29 @@
 
 using namespace std;
 
-void dfs(int node, vector<vector<int>>& computers, vector<bool>& isVisited);
+void network(int pc, vector<vector<int>>& computers, vector<bool>& isVisited);
 
 int solution(int n, vector<vector<int>> computers) {
     int answer = 0;
     vector<bool> isVisited(n, false);
     
-    for(int i = 0; i < n; i++) {
+    for(int i = 0; i < computers.size(); i++) {
         if(!isVisited[i]) {
+            network(i, computers, isVisited);
             answer++;
-            dfs(i, computers, isVisited);
         }
     }
+    
     return answer;
 }
 
-void dfs(int node, vector<vector<int>>& computers, vector<bool>& isVisited) {
-    for(int i = 0; i < computers.size(); i++) {
-        if(!isVisited[i] && i != node && computers[node][i] == 1) {
-            isVisited[i] = true;
-            dfs(i, computers, isVisited);
+void network(int pc, vector<vector<int>>& computers, vector<bool>& isVisited) {
+    isVisited[pc] = true;
+    
+    for(int i = 0; i < computers[pc].size(); i++) {
+        if(!isVisited[i] && pc != i && computers[pc][i] == 1) {
+            
+            network(i, computers, isVisited);
         }
     }
     return;
