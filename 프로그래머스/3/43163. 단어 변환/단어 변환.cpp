@@ -10,20 +10,20 @@ int solution(string begin, string target, vector<string> words) {
     
     while(!bfs.empty()) {
         string usingword = bfs.front().first;
-        int currentlevel = bfs.front().second;
+        int currentLevel = bfs.front().second;
         bfs.pop();
         
-        if(usingword == target) return currentlevel;
+        if(usingword == target) return currentLevel;
         
         for(int i = 0; i < words.size(); i++) {
+            int cnt = 0; 
             if(!isVisited[i]) {
-                int cnt = 0;
                 for(int j = 0; j < words[i].size(); j++) {
                     if(usingword[j] != words[i][j]) cnt++;
                     if(cnt > 1) break;
                 }
                 if(cnt == 1) {
-                    bfs.push({words[i], currentlevel + 1});
+                    bfs.push({words[i], currentLevel + 1});
                     isVisited[i] = true;
                 }
             }
