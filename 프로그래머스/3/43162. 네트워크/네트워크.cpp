@@ -11,8 +11,8 @@ int solution(int n, vector<vector<int>> computers) {
     
     for(int i = 0; i < computers.size(); i++) {
         if(!isVisited[i]) {
-            network(i, computers, isVisited);
             answer++;
+            network(i, computers, isVisited);
         }
     }
     
@@ -20,11 +20,11 @@ int solution(int n, vector<vector<int>> computers) {
 }
 
 void network(int pc, vector<vector<int>>& computers, vector<bool>& isVisited) {
-    isVisited[pc] = true;
-    
     for(int i = 0; i < computers[pc].size(); i++) {
-        if(!isVisited[i] && pc != i && computers[pc][i] == 1) 
+        if(i != pc && !isVisited[i] && computers[pc][i] == 1) {
+            isVisited[i] = true;
             network(i, computers, isVisited);
+        }
     }
     return;
 }
