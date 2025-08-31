@@ -2,8 +2,7 @@
 #include <vector>
 
 using namespace std;
-
-void network(int pc, vector<vector<int>>& computers, vector<bool>& isVisited);
+void network(int i, vector<vector<int>>& computers, vector<bool>& isVisited);
 
 int solution(int n, vector<vector<int>> computers) {
     int answer = 0;
@@ -19,12 +18,13 @@ int solution(int n, vector<vector<int>> computers) {
     return answer;
 }
 
-void network(int pc, vector<vector<int>>& computers, vector<bool>& isVisited) {
-    for(int i = 0; i < computers[pc].size(); i++) {
-        if(i != pc && !isVisited[i] && computers[pc][i] == 1) {
-            isVisited[i] = true;
+void network(int node, vector<vector<int>>& computers, vector<bool>& isVisited) {
+    if(!isVisited[node]) isVisited[node] = true;
+
+    for(int i = 0; i < computers[node].size(); i++) {
+        if(computers[node][i] == 1 && i != node && !isVisited[i])
             network(i, computers, isVisited);
-        }
     }
+
     return;
 }
