@@ -13,10 +13,9 @@
 
 using namespace std;
 int cnt = 0, cnt1 = 0;
-//int memo[21][21][21];
-int memo[10000001];
-
-void combi(int T, int N, vector<int>& v, vector<bool>& isVisited);
+int memo[21][21][21];
+//int memo[10000001];
+void dfs(int T, int N, vector<int>& v, vector<bool>& isVisited);
 
 int main() {
     ios::sync_with_stdio(false);
@@ -29,25 +28,25 @@ int main() {
     //int a = 0, b = 0, c = 0;
     vector<int> v;
     vector<bool> isVisited(T + 1, false);
-
-    combi(T, N, v, isVisited);
+    //vector<vector<int>> v(T, vector<int>(T));
+    dfs(T, N, v, isVisited);
 
     return 0;
 }
 
-void combi(int T, int N, vector<int>& v, vector<bool>& isVisited) {
+void dfs(int T, int N, vector<int>& v, vector<bool>& isVisited) {
     if (v.size() == N) {
         for (int i = 0; i < v.size(); i++) cout << v[i] << ' ';
         cout << '\n';
         return;
     }
 
-    for (int i = v.empty() ? 1 : v.back() + 1; i <= T; i++) {
+    for (int i = v.empty() ? 1 : v.back(); i <= T; i++) {
         if (!isVisited[i]) {
             isVisited[i] = true;
             v.push_back(i);
 
-            combi(T, N, v, isVisited);
+            dfs(T, N, v, isVisited);
 
             isVisited[i] = false;
             v.pop_back();
