@@ -3,8 +3,7 @@
 #include <algorithm>
 
 using namespace std;
-
-bool dfs(string airport, vector<vector<string>>& tickets, vector<string>& answer, vector<bool>& isVisited);
+bool dfs(string airport, vector<string>& answer, vector<vector<string>>& tickets, vector<bool>& isVisited);
 
 vector<string> solution(vector<vector<string>> tickets) {
     vector<string> answer;
@@ -16,20 +15,20 @@ vector<string> solution(vector<vector<string>> tickets) {
     });
     
     answer.push_back("ICN");
-    dfs("ICN", tickets, answer, isVisited);
+    dfs("ICN", answer, tickets, isVisited);
     
     return answer;
 }
 
-bool dfs(string airport, vector<vector<string>>& tickets, vector<string>& answer, vector<bool>& isVisited) {
+bool dfs(string airport, vector<string>& answer, vector<vector<string>>& tickets, vector<bool>& isVisited) {
     if(answer.size() == tickets.size() + 1) return true;
     
     for(int i = 0; i < tickets.size(); i++) {
-        if(!isVisited[i] && airport == tickets[i][0]) {
+        if(!isVisited[i] && tickets[i][0] == airport) {
             isVisited[i] = true;
             answer.push_back(tickets[i][1]);
             
-            if(dfs(tickets[i][1], tickets, answer, isVisited)) return true;
+            if(dfs(tickets[i][1], answer, tickets, isVisited)) return true;
             
             isVisited[i] = false;
             answer.pop_back();
