@@ -1,7 +1,7 @@
 #include <string>
 #include <vector>
 
-using namespace std;
+using namespace std;\
 void network(int i, vector<vector<int>>& computers, vector<bool>& isVisited);
 
 int solution(int n, vector<vector<int>> computers) {
@@ -18,13 +18,11 @@ int solution(int n, vector<vector<int>> computers) {
     return answer;
 }
 
-void network(int node, vector<vector<int>>& computers, vector<bool>& isVisited) {
-    if(!isVisited[node]) isVisited[node] = true;
-
-    for(int i = 0; i < computers[node].size(); i++) {
-        if(computers[node][i] == 1 && i != node && !isVisited[i])
-            network(i, computers, isVisited);
+void network(int i, vector<vector<int>>& computers, vector<bool>& isVisited) {
+    for(int j = 0; j < computers[i].size(); j++) {
+        if(!isVisited[j] && i != j && computers[i][j] == 1) {
+            isVisited[j] = true;
+            network(j, computers, isVisited);
+        }
     }
-
-    return;
 }
