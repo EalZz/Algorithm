@@ -2,23 +2,22 @@
 #include <vector>
 
 using namespace std;
-
-void count(vector<int> numbers, int target, int sum, int idx);
 int cnt = 0;
+void dfs(int sum, int idx, vector<int> numbers, int target);
 
 int solution(vector<int> numbers, int target) {
-    count(numbers, target, 0, 0);
+    dfs(0, 0, numbers, target);
     return cnt;
 }
 
-void count(vector<int> numbers, int target, int sum, int idx) {
-    if(idx >= numbers.size()) {
+void dfs(int sum, int idx, vector<int> numbers, int target) {
+    if(idx == numbers.size()) {
         if(sum == target) cnt++;
         return;
     }
     
-    count(numbers, target, sum + numbers[idx], idx + 1);
-    count(numbers, target, sum - numbers[idx], idx + 1);
+    dfs(sum + numbers[idx], idx + 1, numbers, target);
+    dfs(sum - numbers[idx], idx + 1, numbers, target);
     
     return;
 }
