@@ -18,7 +18,6 @@ int memo[21][21][21];
 
 void n_queen(int T, int row, int col, vector<bool>& colA, vector<bool>& diag1, vector<bool>& diag2);
 
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
@@ -34,13 +33,10 @@ int main() {
     //vector<vector<bool>> isVisited(T, vector<bool>(T, false));
 
     vector<bool> colA(T, false);
-    vector<bool> diag1(2 * T - 1, false);
-    vector<bool> diag2(2 * T - 1, false);
+    vector<bool> diag1(T * 2 - 1, false);
+    vector<bool> diag2(T * 2 - 1, false);
 
-
-    for (int col = 0; col < T; col++) {
-        n_queen(T, 0, col, colA, diag1, diag2);
-    }
+    for (int col = 0; col < T; col++) n_queen(T, 0, col, colA, diag1, diag2);
     cout << cnt;
 
     return 0;
@@ -53,16 +49,16 @@ void n_queen(int T, int row, int col, vector<bool>& colA, vector<bool>& diag1, v
     }
 
     colA[col] = true;
-    diag1[(row - col) + (T - 1)] = true;
+    diag1[(row - col) + T - 1] = true;
     diag2[row + col] = true;
 
-    for (int i = 0; i < T; i++) {
-        if (!colA[i] && !diag1[(row + 1 - i) + (T - 1)] && !diag2[row + 1 + i])
-            n_queen(T, row + 1, i, colA, diag1, diag2);
+    for (int ncol = 0; ncol < T; ncol++) {
+        if (!colA[ncol] && !diag1[(row + 1 - ncol) + (T - 1)] && !diag2[row + 1 + ncol]) //다음 행으로 이동(row + 1)
+            n_queen(T, row + 1, ncol, colA, diag1, diag2);
     }
 
     colA[col] = false;
-    diag1[(row - col) + (T - 1)] = false;
+    diag1[(row - col) + T - 1] = false;
     diag2[row + col] = false;
 
     return;
