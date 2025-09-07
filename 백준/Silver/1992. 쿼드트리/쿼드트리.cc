@@ -12,43 +12,49 @@
 #include <memory>
 
 using namespace std;
-int cnt = 0;
-//int memo[21][21][21];
-int memo[10000001];
+int cnt = 0, cnt1 = 0;
+int memo[21][21][21];
+//int memo[10000001];
 
-void comp(int T, int row, int col, vector<vector<int>>& v);
+void press(vector<vector<int>>& v, int size, int row, int col);
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    memset(memo, -1, sizeof(memo));
-
+    //memset(memo, -1, sizeof(memo));
     int T = 0; cin >> T;
     //int N = 0; cin >> N;
-    //int a = 0, b = 0, c = 0;
-
+    //int a = 0, b = 0, c = 0; cin >> a >> b >> c;
+    //vector<int> v;
+    //vector<int> tmp;
     vector<vector<int>> v(T, vector<int>(T));
-    string line;
+    //vector<vector<int>> matrix(b, vector<int>(a, 0));
+    //vector<vector<bool>> isVisited(T, vector<bool>(T, false));
 
-    for (int row = 0; row < T; row++) {
-        cin >> line;
-        for (int col = 0; col < T; col++) {
-            v[row][col] = line[col] - '0';
-        }
+    string tmp;
+    for (int row = 0; row < T;row++) {
+        cin >> tmp;
+        for (int col = 0; col < T; col++) v[row][col] = tmp[col] - '0';
     }
 
-    comp(T, 0, 0, v);
+    press(v, T, 0, 0);
 
     return 0;
 }
 
-void comp(int T, int row, int col, vector<vector<int>>& v) {
-    bool isSame = true;
+void press(vector<vector<int>>& v, int size, int row, int col) {
     int standard = v[row][col];
-    for (int crow = row; crow < row + T; crow++) {
-        for (int ccol = col; ccol < col + T; ccol++) {
-            if (v[crow][ccol] != standard) {
+    bool isSame = true;
+
+    if (size == 1) {
+        cout << standard;
+        return;
+    }
+
+    for (int nrow = row; nrow < row + size; nrow++) {
+        for (int ncol = col; ncol < col + size; ncol++) {
+            if (v[nrow][ncol] != standard) {
                 isSame = false;
                 break;
             }
@@ -56,19 +62,20 @@ void comp(int T, int row, int col, vector<vector<int>>& v) {
         if (!isSame) break;
     }
 
+
     if (isSame) {
         cout << standard;
         return;
     }
-    else {
-        cout << '(';
-        int token = T / 2;
-        comp(token, row, col, v);
-        comp(token, row, col + token, v);
-        comp(token, row + token, col, v);
-        comp(token, row + token, col + token, v);
-        cout << ')';
-    }
+
+    int half = size / 2;
+
+    cout << '(';
+    press(v, half, row, col);
+    press(v, half, row, col + half);
+    press(v, half, row + half, col);
+    press(v, half, row + half, col + half);
+    cout << ')';
 
     return;
 }
