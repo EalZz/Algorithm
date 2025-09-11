@@ -36,4 +36,5 @@ void nQueen(int n, int row, vector<bool>& colA, vector<bool>& diag1, vector<bool
             diag2[row + col] = false;
         }
     }
+    return;
 }
