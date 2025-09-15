@@ -8,17 +8,17 @@ int solution(string begin, string target, vector<string> words) {
     bfs.push({begin, 0});
     
     while(!bfs.empty()) {
-        string usingWard = bfs.front().first;
+        string usingWord = bfs.front().first;
         int currentLevel = bfs.front().second;
         bfs.pop();
         
-        if(usingWard == target) return currentLevel;
+        if(usingWord == target) return currentLevel;
         
         for(int i = 0; i < words.size(); i++) {
-            int cnt = 0;
+            int cnt = 0; 
             if(!isVisited[i]) {
                 for(int j = 0; j < words[i].size(); j++) {
-                    if(usingWard[j] != words[i][j]) cnt++;
+                    if(usingWord[j] != words[i][j]) cnt++;
                     if(cnt > 1) break;
                 }
             }
