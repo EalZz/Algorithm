@@ -12,11 +12,11 @@
 #include <memory>
 
 using namespace std;
-int cnt = 0, cnt1 = 0;
-int memo[21][21][21];
+//int cnt = 0, cnt1 = 1e9;
+//int memo[21][21][21];
 //int memo[10000001];
 
-void press(vector<vector<int>>& v, int size, int row, int col);
+void quadtree(int T, int row, int col, vector<vector<int>>& v);
 
 int main() {
     ios::sync_with_stdio(false);
@@ -26,35 +26,30 @@ int main() {
     int T = 0; cin >> T;
     //int N = 0; cin >> N;
     //int a = 0, b = 0, c = 0; cin >> a >> b >> c;
-    //vector<int> v;
+    //vector<int> v(T);
     //vector<int> tmp;
     vector<vector<int>> v(T, vector<int>(T));
     //vector<vector<int>> matrix(b, vector<int>(a, 0));
     //vector<vector<bool>> isVisited(T, vector<bool>(T, false));
 
     string tmp;
-    for (int row = 0; row < T;row++) {
+    for (int row = 0; row < T; row++) {
         cin >> tmp;
         for (int col = 0; col < T; col++) v[row][col] = tmp[col] - '0';
     }
 
-    press(v, T, 0, 0);
+    quadtree(T, 0, 0, v);
 
     return 0;
 }
 
-void press(vector<vector<int>>& v, int size, int row, int col) {
+void quadtree(int T, int row, int col, vector<vector<int>>& v) {
     int standard = v[row][col];
     bool isSame = true;
 
-    if (size == 1) {
-        cout << standard;
-        return;
-    }
-
-    for (int nrow = row; nrow < row + size; nrow++) {
-        for (int ncol = col; ncol < col + size; ncol++) {
-            if (v[nrow][ncol] != standard) {
+    for (int i = row; i < row + T; i++) {
+        for (int j = col; j < col + T; j++) {
+            if (v[i][j] != standard) {
                 isSame = false;
                 break;
             }
@@ -62,19 +57,18 @@ void press(vector<vector<int>>& v, int size, int row, int col) {
         if (!isSame) break;
     }
 
-
     if (isSame) {
         cout << standard;
         return;
     }
 
-    int half = size / 2;
+    int token = T / 2;
 
     cout << '(';
-    press(v, half, row, col);
-    press(v, half, row, col + half);
-    press(v, half, row + half, col);
-    press(v, half, row + half, col + half);
+    quadtree(token, row, col, v);
+    quadtree(token, row, col + token, v);
+    quadtree(token, row + token, col, v);
+    quadtree(token, row + token, col + token, v);
     cout << ')';
 
     return;
