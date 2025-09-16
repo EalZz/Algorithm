@@ -12,70 +12,74 @@
 #include <memory>
 
 using namespace std;
-int cnt = 0, cnt1 = 0;
-int memo[21][21][21];
+//int cnt = 0, cnt1 = 1e9;
+//int memo[21][21][21];
 //int memo[10000001];
 
-void dfs(int c, vector<vector<int>>& edge, vector<bool>& isVisited);
-void bfs(int c, vector<vector<int>>& edge, queue<int>& q, vector<bool>& isVisited);
+void dfs(int node, vector<vector<int>>& v, vector<bool>& isVisited);
+void bfs(int node, queue<int>& q, vector<vector<int>>& v, vector<bool>& isVisited);
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    memset(memo, -1, sizeof(memo));
-
+    //memset(memo, -1, sizeof(memo));
     //int T = 0; cin >> T;
     //int N = 0; cin >> N;
     int a = 0, b = 0, c = 0; cin >> a >> b >> c;
-    //vector<int> v;
+    //vector<int> v(T);
     //vector<int> tmp;
-    vector<vector<int>> edge (a + 1);
+    vector<vector<int>> v(a + 1);
     vector<bool> isVisited(a + 1, false);
+    //vector<vector<int>> matrix(b, vector<int>(a, 0));
+    //vector<vector<bool>> isVisited(T, vector<bool>(T, false));
     queue<int> q;
-    //vector<vector<int>> matrix(b, vector<int>(2));
+
     for (int i = 0; i < b; i++) {
-        int tmp1 = 0; cin >> tmp1;
-        int tmp2 = 0; cin >> tmp2;
-        edge[tmp1].push_back(tmp2);
-        edge[tmp2].push_back(tmp1);
+        int tmp1 = 0, tmp2 = 0;
+        cin >> tmp1 >> tmp2;
+
+        v[tmp1].push_back(tmp2);
+        v[tmp2].push_back(tmp1);
     }
-    for (int i = 1; i <= a; i++) sort(edge[i].begin(), edge[i].end());
+    for (int i = 1; i <= a; i++) sort(v[i].begin(), v[i].end());
 
     isVisited[c] = true;
-    dfs(c, edge, isVisited);
+    dfs(c, v, isVisited);
 
-    for (int i = 0; i < isVisited.size(); i++) isVisited[i] = false;
     cout << '\n';
+    for (int i = 0; i < isVisited.size(); i++) isVisited[i] = false;
 
     isVisited[c] = true;
-    bfs(c, edge, q, isVisited);
+    q.push(c);
+    bfs(c, q, v, isVisited);
 
     return 0;
 }
 
-void dfs(int c, vector<vector<int>>& edge, vector<bool>& isVisited) {
-    cout << c << ' ';
-    for (int i = 0; i < edge[c].size(); i++) {
-        if (!isVisited[edge[c][i]]) {
-            isVisited[edge[c][i]] = true;
-            dfs(edge[c][i], edge, isVisited);
+void dfs(int node, vector<vector<int>>& v, vector<bool>& isVisited) {
+    cout << node << ' ';
+
+    for (int i = 0; i < v[node].size(); i++) {
+        if (!isVisited[v[node][i]]) {
+            isVisited[v[node][i]] = true;
+            dfs(v[node][i], v, isVisited);
         }
     }
     return;
 }
 
-void bfs(int c, vector<vector<int>>& edge, queue<int>& q, vector<bool>& isVisited) {
-    q.push(c);
+void bfs(int node, queue<int>& q, vector<vector<int>>& v, vector<bool>& isVisited) {
     while (!q.empty()) {
-        int usingNode = q.front();
-        cout << usingNode << ' ';
+        int usingNum = q.front();
         q.pop();
 
-        for (int i = 0; i < edge[usingNode].size(); i++) {
-            if (!isVisited[edge[usingNode][i]]) {
-                isVisited[edge[usingNode][i]] = true;
-                q.push(edge[usingNode][i]);
+        cout << usingNum << ' ';
+
+        for (int i = 0; i < v[usingNum].size(); i++) {
+            if (!isVisited[v[usingNum][i]]) {
+                isVisited[v[usingNum][i]] = true;
+                q.push(v[usingNum][i]);
             }
         }
     }
