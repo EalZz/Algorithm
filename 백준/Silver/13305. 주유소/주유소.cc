@@ -25,8 +25,8 @@ int main() {
     int T = 0; cin >> T;
     //int N = 0; cin >> N;
     //int a = 0, b = 0, c = 0; cin >> a >> b >> c;
-    vector<int> v(T);
-    vector<int> tmp(T - 1);
+    vector<long long> v(T);
+    vector<long long> tmp(T - 1);
     //vector<vector<int>> v(T, vector<int>(2, 0));
     //vector<bool> isVisited(T, false);
     //vector<vector<int>> matrix(b, vector<int>(a, 0));
@@ -39,7 +39,7 @@ int main() {
         else v[i] = vtmp;
     }
 
-    int result = 0;
+    long long result = 0;
     for (int i = 0; i < T - 1;i++) result += v[i] * tmp[i];
     cout << result;
 
