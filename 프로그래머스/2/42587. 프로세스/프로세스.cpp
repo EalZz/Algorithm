@@ -16,11 +16,11 @@ int solution(vector<int> priorities, int location) {
     
     int idx = 0;
     while(1) {
-        if(idx > pri.size()) idx = 0;
+        if(idx >= pri.size()) idx = 0;
         if(pri[idx] == -1) idx++;
         
         if(pri[idx] == pq.top()) {
-            if(pri[idx] == priorities[location] && idx == location) return answer;
+            if(idx == location) return answer;
             pri[idx] = -1;
             pq.pop();
             answer++;
