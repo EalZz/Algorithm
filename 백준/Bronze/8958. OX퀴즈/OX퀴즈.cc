@@ -34,14 +34,11 @@ int main() {
     while (T--) {
         string tmp;  cin >> tmp;
 
-        int sum = 0, dx = 1;
-        if (tmp[0] == 'O') sum += dx;
-        for (int i = 1; i < tmp.size(); i++) {
-            if (tmp[i] == 'O') {
-                if (tmp[i - 1] == 'O') dx++;
-                sum += dx;
-            }
-            else dx = 1;
+        int sum = 0, dx = 0;
+        for (auto& c : tmp) {
+            if (c == 'O') dx++;
+            else dx = 0;
+            sum += dx;
         }
         cout << sum << '\n';
     }
