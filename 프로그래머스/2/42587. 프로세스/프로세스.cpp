@@ -16,8 +16,8 @@ int solution(vector<int> priorities, int location) {
     
     int idx = 0;
     while(1) {
-        if(idx >= pri.size()) idx = 0;
         if(pri[idx] == -1) idx++;
+        if(idx >= pri.size()) idx = 0;
         
         if(pri[idx] == pq.top()) {
             if(idx == location) return answer;
