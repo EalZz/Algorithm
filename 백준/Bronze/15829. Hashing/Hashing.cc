@@ -33,10 +33,14 @@ int main() {
     //vector<vector<bool>> isVisited(T, vector<bool>(T, false));
 
     string s; cin >> s;
-    
-    long long sum = 0;
-    for (int i = 0; i < s.size(); i++) sum += (s[i] - 'a' + 1) * pow(31, i);
-    cout << sum;
+    long long r = 1, sum = 0;
 
+    for (int i = 0; i < s.size(); i++) {
+        sum += (((s[i] - 'a' + 1) * r) % 1234567891) % 1234567891;
+        r = (r * 31) % 1234567891;
+    }
+
+    std::cout << sum % 1234567891;
+    
     return 0;
 }
