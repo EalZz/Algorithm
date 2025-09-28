@@ -67,15 +67,16 @@ int main() {
         if (isError) cout << "error" << '\n';
         else {
             cout << '[';
-            if (v.empty()) cout << ']' << '\n';
+            if (v.empty());
             else if (!isReverse) {
                 for (int i = 0; i < v.size() - 1; i++) cout << v[i] << ',';
-                cout << v.back() << ']' << '\n';;
+                cout << v.back();
             }
             else {
                 for (int i = v.size() - 1; i > 0; i--) cout << v[i] << ',';
-                cout << v.front() << ']' << '\n';;
+                cout << v.front();
             }
+            cout << ']' << '\n';
         }
     }
 
