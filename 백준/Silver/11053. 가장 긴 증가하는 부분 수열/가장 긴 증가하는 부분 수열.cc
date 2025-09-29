@@ -41,7 +41,7 @@ int main() {
     result[0] = v[0];
     cnt++;
 
-    for (int i = 0; i < T; i++) {
+    for (int i = 1; i < T; i++) {
         if (v[i] <= result[cnt - 1]) result[lower_bound(result.begin(), result.begin() + cnt, v[i]) - result.begin()] = v[i];
         else {
             result[cnt] = v[i];
