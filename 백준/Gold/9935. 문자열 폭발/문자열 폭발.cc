@@ -41,16 +41,14 @@ int main() {
 
     for (int i = 0; i < str.size(); i++) {
         result.push_back(str[i]);
-        while (1) {
-            if (result.size() < bomb.size()) break;
+        if (result.size() < bomb.size()) continue;
 
-            string tmp = result.substr(result.size() - bomb.size());
-            if (tmp == bomb) {
-                for (int j = 0; j < bomb.size(); j++) result.pop_back();
-            }
-            else break;
+        string tmp = result.substr(result.size() - bomb.size());
+        if (tmp == bomb) {
+            for (int j = 0; j < bomb.size(); j++) result.pop_back();
         }
     }
+    
     if (result.empty()) cout << "FRULA";
     else cout << result;
 
