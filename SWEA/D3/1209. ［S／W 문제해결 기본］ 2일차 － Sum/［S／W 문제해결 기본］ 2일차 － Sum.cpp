@@ -23,19 +23,21 @@ int main() {
 		int asdf; cin >> asdf;
 		
 		long long sumDiag1 = 0, sumDiag2 = 0, sumMax = 0;
-		vector<int> sumRow(100), sumCol(100);
+		vector<long long> sumRow(100, 0), sumCol(100, 0);
 		for (int row = 0; row < 100; row++) {
 			for (int col = 0; col < 100; col++) {
 				int tmp; cin >> tmp;
-				sumRow[col] += tmp;
-				sumCol[row] += tmp;
+				sumRow[row] += tmp;
+				sumCol[col] += tmp;
 				if (row == col) sumDiag1 += tmp;
 				if (row + col == 99) sumDiag2 += tmp;
 			}
 		}
-		sort(sumRow.begin(), sumRow.end());
-		sort(sumCol.begin(), sumCol.end());
-		long long maxRow = sumRow.back(), maxCol = sumCol.back();
+		long long maxRow = 0, maxCol = 0;
+		for (int i = 0; i < 100; i++) {
+			maxRow = max(maxRow, sumRow[i]);
+			maxCol = max(maxCol, sumCol[i]);
+		}
 		sumMax = max(maxRow, max(maxCol, max(sumDiag1, sumDiag2)));
 
 		cout << "#" << t;
