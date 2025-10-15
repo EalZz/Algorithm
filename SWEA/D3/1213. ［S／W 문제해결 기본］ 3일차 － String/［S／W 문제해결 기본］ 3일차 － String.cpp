@@ -27,7 +27,15 @@ int main() {
 
 		for (int i = 0; i < str.size() - token.size() + 1; i++) {
 			if (token[0] != str[i]) continue;
-			if (token == str.substr(i, token.size())) result++;
+
+			bool match = true;
+			for (int j = 0; j < token.size(); j++) {
+				if (str[i + j] != token[j]) {
+					match = false;
+					break;
+				}
+			}
+			if (match) result++;;
 		}
 
 		cout << "#" << t << ' ' << result << '\n';
