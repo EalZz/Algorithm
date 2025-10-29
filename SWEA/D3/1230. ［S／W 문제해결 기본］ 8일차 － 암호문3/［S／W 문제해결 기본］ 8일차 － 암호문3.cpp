@@ -1,58 +1,63 @@
 #include <iostream>
 #include <string>
+#include <cstring>
 #include <algorithm>
 #include <cmath>
 #include <vector>
 #include <map>
 #include <set>
+#include <stack>
+#include <queue>
+#include <deque>
+#include <memory>
 
 using namespace std;
 
 int main() {
-    for (int i = 1; i <= 10; i++) {
-        int N = 0; cin >> N;
-        vector<int> v;
+	int T = 10; //cin >> T;
 
-        for (int j = 0; j < N; j++) {
-            int tmp = 0;
-            cin >> tmp;
-            v.push_back(tmp);
-        }
-        
-        int M = 0; cin >> M;
+	for (int t = 1; t <= T; t++) {
+		//int tc; cin >> tc;
 
-        for (int j = 0; j < M; j++) {
-            char order; cin >> order;
-            int x = 0, y = 0, c = 0;
-            vector<int> tmp;
+		vector<int> cord;
+		int N; cin >> N;
+		for (int i = 0; i < N; i++) {
+			int tmp; cin >> tmp;
+			cord.push_back(tmp);
+		}
 
-            switch (order)
-            {
-            case 'I':
-                cin >> x >> y;
-                for (int k = 0; k < y; k++) {
-                    int c = 0; cin >> c;
-                    tmp.push_back(c);
-                }
-                v.insert(v.begin() + x, tmp.begin(), tmp.end());
-                break;
-            case 'D':
-                cin >> x >> y;
-                for (int k = 0; k < y; k++) v.erase(v.begin() + x);
-                break;
-            case 'A' :
-                cin >> y;
-                for (int k = 0; k < y; k++) {
-                    cin >> c;
-                    v.push_back(c);
-                }
-                break;
-            }
-        }
+		cin >> N;
+		while (N--) {
+			char c; cin >> c;
+			vector<int> tmp;
+			switch (c) {
+				int x, y;
+			case 'I':
+				cin >> x >> y;
+				for (int i = 0; i < y; i++) {
+					int s; cin >> s;
+					tmp.push_back(s);
+				}
+				cord.insert(cord.begin() + x, tmp.begin(), tmp.end());
+				break;
+			case 'D':
+				cin >> x >> y;
+				cord.erase(cord.begin() + x, cord.begin() + x + y);
+				break;
+			case 'A':
+				cin >> y;
+				while (y--) {
+					int s; cin >> s;
+					cord.push_back(s);
+				}
+				break;
+			}
+		}
 
-        cout << "#" << i << ' ';
-        for (int j = 0; j < 10; j++) cout << v[j] << ' ';
-        cout << endl;
-    }
-    return 0;
+		cout << "#" << t << ' ';
+		for (int i = 0; i < 10; i++) cout << cord[i] << ' ';
+		cout << '\n';
+	}
+
+	return 0;
 }
