@@ -21,23 +21,24 @@ int main() {
 
     for (int t = 1; t <= T; t++) {
         //int tc; cin >> tc;
+
+        vector<int> bus(5002, 0);
+
         int N; cin >> N;
-        vector<pair<int, int>> v(N);
-        for (int i = 0; i < N; i++) cin >> v[i].first >> v[i].second;
-
-        int P; cin >> P;
-        vector<int> ans;
-        while (P--) {
-            int C, cnt = 0; cin >> C;
-
-            for (auto& p : v) {
-                if (C >= p.first && C <= p.second) cnt++;
-            }
-            ans.push_back(cnt);
+        for (int i = 0; i < N; i++) {
+            int A, B; cin >> A >> B;
+            bus[A]++;
+            bus[B + 1]--;
         }
 
+        for (int i = 1; i <= 5000; i++) bus[i] += bus[i - 1];
+
+        int P; cin >> P;
         cout << '#' << t << ' ';
-        for (auto& i : ans) cout << i << ' ';
+        while (P--) {
+            int C; cin >> C;
+            cout << bus[C] << ' ';
+        }
         cout << '\n';
     }
     return 0;
