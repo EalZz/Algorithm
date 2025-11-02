@@ -23,22 +23,8 @@ int main() {
         //int tc; cin >> tc;
 
         int N; cin >> N;
-        //vector<vector<char>> v(N, vector<char>(N));
-        //vector<vector<char>> cv(N, vector<char>(N));
-
-        /*
-        for (int row = 0; row < N; row++) {
-            string tmp; cin >> tmp;
-            for (int col = 0; col < N; col++) {
-                v[row][col] = tmp[col];
-                cv[col][row] = tmp[col];
-            }
-        }
-        */
-
         vector<string> v(N);
         vector<string> cv(N);
-
         for (int row = 0; row < N; row++) {
             cin >> v[row];
             for (int col = 0; col < N; col++) cv[col].push_back(v[row][col]);
