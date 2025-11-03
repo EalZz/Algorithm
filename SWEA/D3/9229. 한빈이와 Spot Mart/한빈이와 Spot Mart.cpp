@@ -11,6 +11,9 @@
 #include <deque>
 
 using namespace std;
+int ans = -1;
+
+void dfs(int idx, int cnt, int sum, int limit, vector<int>& v);
 
 int main() {
     ios::sync_with_stdio(false);
@@ -27,20 +30,24 @@ int main() {
         for (int i = 0; i < N; i++) cin >> v[i];
         sort(v.begin(), v.end());
 
-        int ans = -1;
-        int left = 0, right = N - 1;
-        while (left < right) {
-            int sum = v[left] + v[right];
-            if (sum > M) right--;
-            else {
-                ans = max(ans, sum);
-                left++;
-            }
-        }
+        ans = -1;
+        dfs(0, 0, 0, M, v);
 
         cout << "#" << t << " ";
         cout << ans;
         cout << '\n';
     }
     return 0;
+}
+
+void dfs(int idx, int cnt, int sum, int limit, vector<int>& v) {
+    if (sum > limit) return;
+    if (cnt == 2) {
+        ans = max(ans, sum);
+        return;
+    }
+    if (idx >= v.size()) return;
+
+    dfs(idx + 1, cnt, sum, limit, v);
+    dfs(idx + 1, cnt + 1, sum + v[idx], limit, v);
 }
