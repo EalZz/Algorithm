@@ -28,6 +28,8 @@ int main() {
 
         int ans = 1e9;
         for (int i = 0; i < 7; i++) {
+            if (v[i] == 0) continue;
+
             int tmp = 0, cnt = 0, idx = i;
             while (cnt != n) {
                 if (tmp >= ans) break;
