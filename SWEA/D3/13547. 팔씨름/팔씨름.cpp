@@ -23,9 +23,7 @@ int main() {
         //int tc; cin >> tc;
 
         string s; cin >> s;
-        sort(s.begin(), s.end());
-
-        int xcnt = s.size() - (upper_bound(s.begin(), s.end(), 'o') - lower_bound(s.begin(), s.end(), 'o'));
+        int xcnt = count(s.begin(), s.end(), 'x');
 
         cout << "#" << t << " ";
         if (xcnt <= 7) cout << "YES";
