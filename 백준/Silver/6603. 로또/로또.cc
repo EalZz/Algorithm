@@ -14,7 +14,7 @@
 
 using namespace std;
 
-void dfs(int idx, vector<int> ans, vector<int>& v);
+void dfs(int idx, vector<int>& ans, vector<int>& v);
 
 int main() {
     ios::sync_with_stdio(false);
@@ -32,11 +32,11 @@ int main() {
     return 0;
 }
 
-void dfs(int idx, vector<int> ans, vector<int>& v) {
+void dfs(int idx, vector<int>& ans, vector<int>& v) {
     if (ans.size() + v.size() - idx < 6) return;
 
     if (ans.size() == 6) {
-        for (int i = 0; i < 6; i++) cout << ans[i] << ' ';
+        for (auto& a : ans) cout << a << ' ';
         cout << '\n';
         return;
     }
@@ -46,5 +46,6 @@ void dfs(int idx, vector<int> ans, vector<int>& v) {
         dfs(i + 1, ans, v);
         ans.pop_back();
     }
+
     return;
 }
