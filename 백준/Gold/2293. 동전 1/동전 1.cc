@@ -18,16 +18,16 @@ int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
 
-    int n, k; cin >> n >> k;
-    vector<int> dp(k + 1, 0);
+    int N, M; cin >> N >> M;
+    vector<int> dp(M + 1, 0);
     dp[0] = 1;
 
-    while (n--) {
+    while (N--) {
         int v; cin >> v;
-        for (int i = v; i <= k; i++) dp[i] += dp[i - v];
+        for (int i = v; i <= M; i++) dp[i] += dp[i - v];
     }
 
-    cout << dp[k];
+    cout << dp[M];
 
     return 0;
 }
