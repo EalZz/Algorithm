@@ -12,7 +12,7 @@
 
 using namespace std;
 
-int dfs(int row, int col, vector<vector<int>>& dp, vector<vector<int>>& v);
+int dfs(int row, int col, vector<vector<int>>& v, vector<vector<int>>& dp);
 
 int main() {
     ios::sync_with_stdio(false);
@@ -34,12 +34,12 @@ int main() {
         vector<vector<int>> dp(N, vector<int>(N, 0));
         for (int row = 0; row < N; row++) {
             for (int col = 0; col < N; col++) {
-                int cnt = dfs(row, col, dp, v);
-                if (cnt > ans) {
+                int cnt = dfs(row, col, v, dp);
+                if (ans < cnt) {
                     ans = cnt;
                     node = v[row][col];
                 }
-                else if (cnt == ans && v[row][col] < node) node = v[row][col];
+                else if(ans == cnt && node > v[row][col]) node = v[row][col];
             }
         }
 
@@ -50,7 +50,7 @@ int main() {
     return 0;
 }
 
-int dfs(int row, int col, vector<vector<int>>& dp, vector<vector<int>>& v) {
+int dfs(int row, int col, vector<vector<int>>& v, vector<vector<int>>& dp) {
     if (dp[row][col] != 0) return dp[row][col];
 
     int dy[4] = { 1, -1, 0, 0 };
@@ -58,14 +58,14 @@ int dfs(int row, int col, vector<vector<int>>& dp, vector<vector<int>>& v) {
     int cnt = 1;
 
     for (int i = 0; i < 4; i++) {
-        int nrow = row + dy[i];
-        int ncol = col + dx[i];
+        int nextRow = row + dy[i];
+        int nextCol = col + dx[i];
 
-        if (nrow >= v.size() || ncol >= v.size() || nrow < 0 || ncol < 0) continue;
-        if (v[nrow][ncol] != v[row][col] + 1) continue;
+        if (nextRow >= v.size() || nextCol >= v.size() || nextRow < 0 || nextCol < 0) continue;
+        if (v[nextRow][nextCol] != v[row][col] + 1) continue;
 
-        cnt = max(cnt, dfs(nrow, ncol, dp, v) + 1);
+        cnt = max(cnt, dfs(nextRow, nextCol, v, dp) + 1);
     }
-    
+
     return dp[row][col] = cnt;
 }
