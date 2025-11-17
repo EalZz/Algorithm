@@ -17,29 +17,29 @@ using namespace std;
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
+    cout.tie(0);
 
     int N, M; cin >> N >> M;
-    vector<bool> isBroken(11, false);
-    for (int i = 0; i < M; i++) {
-        int btn; cin >> btn;
-        isBroken[btn] = true;
+    vector<bool> isBroken(10, false);
+    while (M--) {
+        int tmp; cin >> tmp;
+        isBroken[tmp] = true;
     }
 
     int ans = abs(N - 100);
 
-    int pre = 1e9;
     for (int i = 0; i <= 1000000; i++) {
-        string ch = to_string(i);
+        string s = to_string(i);
+
         bool isAble = true;
-        for (auto c : ch) {
-            if (isBroken[c - '0']) {
-                isAble = false;
-                break;
-            }
+        for (auto& c : s) {
+            if (!isBroken[c - '0']) continue;
+            isAble = false;
+            break;
         }
+
         if (!isAble) continue;
-        int tmp = ch.size() + abs(N - i);
-        ans = min(ans, tmp);
+        ans = min(ans, int(abs(N - i) + s.size()));
     }
 
     cout << ans;
