@@ -17,7 +17,7 @@ using namespace std;
 int dy[4] = { 1, -1, 0, 0 };
 int dx[4] = { 0, 0, 1, -1 };
 
-void bfs(int row, int col, vector<vector<int>> v, vector<vector<bool>>& isVisited);
+void bfs(int row, int col, vector<vector<int>>& v, vector<vector<bool>>& isVisited);
 
 int main() {
     ios::sync_with_stdio(false);
@@ -70,7 +70,7 @@ int main() {
     return 0;
 }
 
-void bfs(int row, int col, vector<vector<int>> v, vector<vector<bool>>& isVisited) {
+void bfs(int row, int col, vector<vector<int>>& v, vector<vector<bool>>& isVisited) {
     queue<pair<int, int>> q;
     q.push({ row, col });
     isVisited[row][col] = true;
