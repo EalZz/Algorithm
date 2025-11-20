@@ -14,11 +14,6 @@
 
 using namespace std;
 
-int dy[8] = { 1, 2, 2, 1, -1, -2, -2, -1 };
-int dx[8] = { 2, 1, -1, -2, -2, -1, 1, 2 };
-
-int bfs(int row, int col, int cnt, vector<vector<bool>>& isVisited);
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
