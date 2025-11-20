@@ -14,28 +14,25 @@
 
 using namespace std;
 
-int dp[1001];
-
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
+    cout.tie(0);
 
-    int n; cin >> n;
-    vector<int> v(n), dp(n + 1);
-    for (int i = 0; i < n; i++) cin >> v[i];
+    int N; cin >> N;
+    vector<int> v(N), dp(N, 0);
+    for (int i = 0; i < N; i++) cin >> v[i];
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < N; i++) {
         dp[i] = v[i];
-        for (int j = 0; j < i; j++) {
-            if (v[j] < v[i]) dp[i] = max(dp[i], dp[j] + v[i]);
+        for (int j = 0; j <= i; j++) {
+            if(v[j] < v[i]) dp[i] = max(dp[i], dp[j] + v[i]);
         }
     }
 
     int ans = 0;
-    for (auto& i : dp) ans = max(ans, i);
-
+    for (auto& d : dp) ans = max(ans, d);
     cout << ans;
 
     return 0;
 }
-
