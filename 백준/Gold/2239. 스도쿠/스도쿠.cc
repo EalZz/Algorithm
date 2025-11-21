@@ -10,58 +10,41 @@
 #include <queue>
 #include <deque>
 #include <memory>
+#include <list>
 
 using namespace std;
-int cnt = 0, cnt1 = 1e9;
-//int cnt_1 = 0, cnt0 = 0, cnt1 = 0;
-//int memo[21][21][21];
-//long long memo[3];
-//long long memo[101][10];
-//long long memo[100001];
-//long long MOD = 1000000000;
 
-bool dfs(int row, int col, vector<vector<int>>& v, vector<vector<bool>>& brow, vector<vector<bool>>& bcol, vector<vector<bool>>& bbox);
+bool dfs(int row, int col, vector<vector<int>>& v, vector<vector<bool>>& vrow, vector<vector<bool>>& vcol, vector<vector<bool>>& vbox);
 
 int main() {
     ios::sync_with_stdio(false);
     cin.tie(0);
-
-    //int T = 0; cin >> T;
-    //int N = 0; cin >> N;
-    //int a = 0, b = 0, c = 0; cin >> a >> b >> c;
-    //vector<int> v(T + 1, 0);
-    //vector<vector<int>> v(N , vector<int>(2));
-    //vector<bool> isVisited(T + 1, false);
-    //vector<vector<bool>> isVisited(T, vector<bool>(T, false));
-    //vector<vector<int>> matrix(b, vector<int>(a, 0));
-    //vector<vector<bool>> isVisited(T, vector<bool>(T, false));
+    cout.tie(0);
 
     vector<vector<int>> v(9, vector<int>(9, 0));
-    vector<vector<bool>> brow(9, vector<bool>(10, false));
-    vector<vector<bool>> bcol(9, vector<bool>(10, false));
-    vector<vector<bool>> bbox(9, vector<bool>(10, false));
+    vector<vector<bool>> vrow(9, vector<bool>(10, false));
+    vector<vector<bool>> vcol(9, vector<bool>(10, false));
+    vector<vector<bool>> vbox(9, vector<bool>(10, false));
 
-    string tmp;
     for (int row = 0; row < 9; row++) {
-        cin >> tmp;
+        string tmp; cin >> tmp;
         for (int col = 0; col < 9; col++) {
-            int num = tmp[col] - '0';
-            v[row][col] = num;
-            if (num != 0) {
+            v[row][col] = tmp[col] - '0';
+            if (v[row][col] != 0) {
                 int box = (row / 3) * 3 + (col / 3);
-                brow[row][num] = true;
-                bcol[col][num] = true;
-                bbox[box][num] = true;
+                vrow[row][v[row][col]] = true;
+                vcol[col][v[row][col]] = true;
+                vbox[box][v[row][col]] = true;
             }
         }
     }
 
-    dfs(0, 0, v, brow, bcol, bbox);
+    dfs(0, 0, v, vrow, vcol, vbox);
 
     return 0;
 }
 
-bool dfs(int row, int col, vector<vector<int>>& v, vector<vector<bool>>& brow, vector<vector<bool>>& bcol, vector<vector<bool>>& bbox) {
+bool dfs(int row, int col, vector<vector<int>>& v, vector<vector<bool>>& vrow, vector<vector<bool>>& vcol, vector<vector<bool>>& vbox) {
     if (row == 9) {
         for (int i = 0; i < 9; i++) {
             for (int j = 0; j < 9; j++) cout << v[i][j];
@@ -70,26 +53,25 @@ bool dfs(int row, int col, vector<vector<int>>& v, vector<vector<bool>>& brow, v
         return true;
     }
 
-    int nrow = (col == 8) ? row + 1 : row;
-    int ncol = (col == 8) ? 0 : col + 1;
-
-    if (v[row][col] != 0) return dfs(nrow, ncol, v, brow, bcol, bbox);
+    int nextRow = (col == 8) ? row + 1 : row;
+    int nextCol = (col == 8) ? 0 : col + 1;
+    if (v[row][col] != 0) return dfs(nextRow, nextCol, v, vrow, vcol, vbox);
 
     int box = (row / 3) * 3 + (col / 3);
 
-    for (int num = 1; num <= 9; num++) {
-        if (brow[row][num] || bcol[col][num] || bbox[box][num]) continue;
+    for (int i = 1; i <= 9; i++) {
+        if (vrow[row][i] || vcol[col][i] || vbox[box][i]) continue;
 
-        brow[row][num] = true;
-        bcol[col][num] = true;
-        bbox[box][num] = true;
-        v[row][col] = num;
+        vrow[row][i] = true;
+        vcol[col][i] = true;
+        vbox[box][i] = true;
+        v[row][col] = i;
 
-        if (dfs(nrow, ncol, v, brow, bcol, bbox)) return true;
+        if (dfs(nextRow, nextCol, v, vrow, vcol, vbox)) return true;
 
-        brow[row][num] = false;
-        bcol[col][num] = false;
-        bbox[box][num] = false;
+        vrow[row][i] = false;
+        vcol[col][i] = false;
+        vbox[box][i] = false;
         v[row][col] = 0;
     }
     return false;
