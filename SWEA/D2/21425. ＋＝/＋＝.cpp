@@ -9,30 +9,33 @@
 #include <stack>
 #include <queue>
 #include <deque>
-#include <memory>
 
 using namespace std;
-//int cnt = 0, cnt1 = 0;
-int memo[21][21][21];
-//int memo[10000001];
-string change;
+
+void dfs(int node, vector<char>& value, vector<vector<int>>& edge);
 
 int main() {
-	int T; cin >> T;
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+    cout.tie(NULL);
 
-	for (int t = 1; t <= T; t++) {
-		int a; cin >> a; 
-		int b; cin >> b;
-		int c; cin >> c;
-		//vector<vector<int>>v(9, vector<int>(9));
-		int cnt = 0;
-		while (a <= c && b <= c) {
-			a >= b ? b += a : a += b;
-			cnt++;
-		}
-		cout << cnt << '\n';
-		//cout << "#" << t << ' ';
-	}
+    int T = 10; cin >> T;
 
-	return 0;
+    for (int t = 1; t <= T; t++) {
+        //int tc; cin >> tc;
+
+        int a, b, n; cin >> a >> b >> n;
+
+        int cnt = 1;
+        while (a + b <= n) {
+            if (a < b) a += b;
+            else b += a;
+            cnt++;
+        }
+
+        //cout << "#" << t << " ";
+        cout << cnt;
+        cout << '\n';
+    }
+    return 0;
 }
