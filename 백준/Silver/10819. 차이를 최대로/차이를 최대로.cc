@@ -22,12 +22,12 @@ int main() {
     cout.tie(0);
 
     int N; cin >> N;
-    vector<int> v(N), dp(N, 0);
+    vector<int> v(N), sum;
     for (int i = 0; i < N; i++) cin >> v[i];
 
     int ans = 0;
-    vector<int> sum;
     vector<bool> isVisited(N, false);
+
     dfs(ans, sum, v, isVisited);
 
     cout << ans;
@@ -38,7 +38,7 @@ int main() {
 void dfs(int& ans, vector<int>& sum, vector<int>& v, vector<bool>& isVisited) {
     if (sum.size() == v.size()) {
         int tmp = 0;
-        for (int i = 0; i < v.size() - 1; i++) tmp += abs(sum[i] - sum[i + 1]);
+        for (int i = 0; i < sum.size() - 1; i++) tmp += abs(sum[i] - sum[i + 1]);
         ans = max(ans, tmp);
         return;
     }
@@ -53,6 +53,5 @@ void dfs(int& ans, vector<int>& sum, vector<int>& v, vector<bool>& isVisited) {
         isVisited[i] = false;
         sum.pop_back();
     }
-
     return;
 }
